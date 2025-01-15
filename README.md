@@ -60,15 +60,13 @@ Achieve perfect exercise form with advanced computer vision. Get real-time feedb
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-name>
+   git clone https://github.com/androidvitb/PosturePerfect
+   cd ./PosturePerfect
    ```
 
 2. **Set up the Backend Server:**
-   - Install all required packages:
-     ```bash
-     pip install -r requirements.txt
-     ```
+   - Install all required packages
+
    - Download **FFmpeg**:
      - Visit [FFmpeg Builds](https://www.gyan.dev/ffmpeg/builds/).
      - Download `ffmpeg-git-full.7z`, extract it, and add the `bin` folder to your environment `PATH`.
