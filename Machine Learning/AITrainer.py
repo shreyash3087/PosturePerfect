@@ -14,7 +14,7 @@ pTime = 0
 
 # Initialize pygame mixer for playing sound
 pygame.mixer.init()
-song = pygame.mixer.Sound("sound.mp3")  # Replace with your song file path
+song = pygame.mixer.Sound("sound.mp3")  
 
 url = "http://localhost:3000/api/countinc"
 
@@ -36,12 +36,12 @@ while True:
                 count += 0.5
                 dir = 1
                 data = {"count": count}
-                #response = requests.post(url, json=data)
-                #print(response.status_code, response.text)
+                response = requests.post(url, json=data)
+                print(response.status_code, response.text)
 
                 # Play the song when a push-up is completed
-                if  count % 1 == 0:  # Play once for every complete push-up
-                    song.play()  # Play the song
+                if  count % 1 == 0:  
+                    song.play() 
                     print("Push-up completed! Song is playing!")
 
         if per == 0:
@@ -50,10 +50,10 @@ while True:
                 count += 0.5
                 dir = 0
                 data = {"count": count}
-                #response = requests.post(url, json=data)
-                #print(response.status_code, response.text)
+                response = requests.post(url, json=data)
+                print(response.status_code, response.text)
                 if  count % 1 == 0:  # Play once for every complete push-up
-                    song.play()  # Play the song
+                    song.play()  
                     print("Push-up completed! Song is playing!")
         print(count)
 
