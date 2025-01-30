@@ -20,8 +20,8 @@ class ExerciseTracker:
         self.start_time = None
 
 class PoseDetector:
-    def _init_(self, mode=False, upBody=False, smooth=True,
-                 detectionCon=0.5, trackCon=0.5):
+    def __init__(self, mode=False, upBody=False, smooth=True,
+                 detectionCon=0.5, trackCon=0.5):  # Corrected the method name
         self.mode = mode
         self.upBody = upBody
         self.smooth = smooth
@@ -30,6 +30,8 @@ class PoseDetector:
         
         self.mpDraw = mp.solutions.drawing_utils
         self.mpPose = mp.solutions.pose
+        
+        # Initialize the Pose object
         self.pose = self.mpPose.Pose(
             static_image_mode=self.mode,
             smooth_landmarks=self.smooth,
@@ -175,5 +177,5 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     main()
