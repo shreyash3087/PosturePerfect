@@ -12,7 +12,7 @@ class ExerciseType(Enum):
 
 
 class ExerciseTracker:
-    def _init_(self):
+    def __init__(self):
         self.counter = 0
         self.stage = None
         self.is_recording = False
@@ -28,7 +28,7 @@ class PoseDetector:
         self.detectionCon = detectionCon
         self.trackCon = trackCon
         
-        self.mpDraw = mp.solutions.drawing_utils
+        self.mpDraw = mp.solutions.drawing_utils 
         self.mpPose = mp.solutions.pose
         
         # Initialize the Pose object
@@ -38,6 +38,10 @@ class PoseDetector:
             min_detection_confidence=self.detectionCon,
             min_tracking_confidence=self.trackCon
         )
+
+        # Initialize the current exercise attribute
+        self.current_exercise = ExerciseType.BICEP_CURL  
+
         # Initialise exercise tracker
         self.exercise_trackers = {
             ExerciseType.BICEP_CURL: ExerciseTracker(),
@@ -102,11 +106,17 @@ class PoseDetector:
         tracker = self.exercise_trackers[exercise_type]
         
         if exercise_type == ExerciseType.BICEP_CURL:
-            angle = self.findAngle(img, 12, 14, 16)                         # will track right arm
+            angle_right = self.findAngle(img, 12, 14, 16) 
+            angle_left = self.findAngle(img, 11, 13, 15)   
+            angle = (angle_right + angle_left) / 2                       
         elif exercise_type == ExerciseType.SQUAT:
-            angle = self.findAngle(img, 24, 26, 28)                         # will track right leg
+            angle_right = self.findAngle(img, 12, 14, 16) 
+            angle_left = self.findAngle(img, 11, 13, 15)   
+            angle = (angle_right + angle_left) / 2                      
         elif exercise_type == ExerciseType.PUSHUP:
-            angle = self.findAngle(img, 12, 14, 16)                         # will track right arm for push ups
+            angle_right = self.findAngle(img, 12, 14, 16) 
+            angle_left = self.findAngle(img, 11, 13, 15)   
+            angle = (angle_right + angle_left) / 2                      
 
         # Count reps
         if angle > self.exercise_angles[exercise_type]["start"]:
@@ -122,6 +132,7 @@ class PoseDetector:
                     cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
         cv2.putText(img, f'Stage: {tracker.stage}', (50, 150),
                     cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 2)
+        
 
         return img
 
@@ -177,5 +188,6 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-if __name__ == "_main_":
+
+if __name__ == "__main__":
     main()
