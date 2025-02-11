@@ -90,11 +90,11 @@ class PoseDetector:
             exercise_type: ExerciseTracker() for exercise_type in ExerciseType
         }
         
-        pygame.mixer.init()
-        self.sounds = {
-            'rep_complete': pygame.mixer.Sound('rep_complete.wav'),
-            'form_error': pygame.mixer.Sound('form_error.wav')
-        }
+        # pygame.mixer.init()
+        # self.sounds = {
+        #     'rep_complete': pygame.mixer.Sound('rep_complete.wav'),
+        #     'form_error': pygame.mixer.Sound('form_error.wav')
+        # }
         
         #Performance thresholds
         self.rep_speed_threshold = 1.0  #min sec per rep
